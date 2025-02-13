@@ -445,3 +445,32 @@ variable "cache_hit_rate_threshold" {
     error_message = "Cache hit rate threshold must be between 0 and 1"
   }
 }
+
+variable "customer_managed_key" {
+  description = "Customer managed encryption key for Redis instance"
+  type        = string
+  default     = null
+}
+
+variable "client_timeout" {
+  description = "Client timeout in seconds"
+  type        = number
+  default     = 3600
+}
+
+variable "tcp_keepalive" {
+  description = "TCP keepalive interval in seconds"
+  type        = number
+  default     = 300
+}
+
+variable "defrag_settings" {
+  description = "Redis defragmentation settings"
+  type = object({
+    active         = bool
+    threshold      = number
+    schedule_mode  = string
+    schedule_hours = list(number)
+  })
+  default = null
+}

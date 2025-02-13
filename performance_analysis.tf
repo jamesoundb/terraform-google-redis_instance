@@ -132,7 +132,7 @@ resource "google_monitoring_alert_policy" "performance_degradation" {
       - Memory efficiency
       - Latency performance
       - Throughput capacity
-      
+
       Recommended actions:
       1. Review performance analysis dashboard
       2. Check Redis configuration settings

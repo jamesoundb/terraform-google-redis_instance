@@ -37,8 +37,50 @@ resource "google_kms_crypto_key" "redis" {
   }
 }
 
+# Storage buckets for Redis backups
+resource "google_storage_bucket" "redis_backup" {
+  count                       = var.enable_backup ? 1 : 0
+  name                        = "redis-secure-backup-${var.project_id}"
+  location                    = var.region
+  uniform_bucket_level_access = true
+
+  versioning {
+    enabled = true
+  }
+
+  lifecycle_rule {
+    condition {
+      age = var.backup_retention_days
+    }
+    action {
+      type = "Delete"
+    }
+  }
+}
+
+resource "google_storage_bucket" "cross_region_backup" {
+  for_each = var.cross_region_backup ? toset(var.backup_regions) : []
+
+  name                        = "redis-dr-backup-${each.value}-${var.project_id}"
+  location                    = each.value
+  uniform_bucket_level_access = true
+
+  versioning {
+    enabled = true
+  }
+
+  lifecycle_rule {
+    condition {
+      age = var.backup_retention_days
+    }
+    action {
+      type = "Delete"
+    }
+  }
+}
+
 # Deploy Redis instance with security and backup features
-# Note: For Customer Managed Encryption Keys (CMEK), you'll need to configure this at the 
+# Note: For Customer Managed Encryption Keys (CMEK), you'll need to configure this at the
 # project level or use the google_redis_instance resource directly. This module currently
 # does not support CMEK configuration.
 module "redis_secure" {

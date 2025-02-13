@@ -36,7 +36,7 @@ module "redis" {
   memory_size_gb    = 5
   tier              = "STANDARD_HA"
   authorized_network = "projects/your-project/global/networks/your-vpc"
-  
+
   # Workload-specific optimization
   workload_type     = "cache"  # Options: cache, session, queue
 }

@@ -58,3 +58,69 @@ output "workload_performance" {
     redis_configs = google_redis_instance.cache[0].redis_configs
   } : null
 }
+
+output "memory_size_gb" {
+  description = "The memory size of the Redis instance in GB"
+  value       = google_redis_instance.cache[0].memory_size_gb
+}
+
+output "security_config" {
+  description = "Security configuration of the Redis instance"
+  value = {
+    auth_enabled            = var.auth_enabled
+    transit_encryption_mode = google_redis_instance.cache[0].transit_encryption_mode
+    maintenance_policy      = google_redis_instance.cache[0].maintenance_policy
+    customer_managed_key    = var.customer_managed_key
+  }
+}
+
+output "network_security" {
+  description = "Network security configuration"
+  value = {
+    authorized_network = google_redis_instance.cache[0].authorized_network
+    connect_mode       = google_redis_instance.cache[0].connect_mode
+    reserved_ip_range  = google_redis_instance.cache[0].reserved_ip_range
+  }
+  sensitive = true
+}
+
+output "performance_metrics" {
+  description = "Performance metrics configuration and thresholds"
+  value = {
+    instance_id = google_redis_instance.cache[0].id
+    metrics = {
+      memory = {
+        total_bytes_allocated = "memcache.googleapis.com/stats/bytes"
+        evicted_items         = "memcache.googleapis.com/stats/evicted_items"
+        items_count           = "memcache.googleapis.com/stats/items"
+      }
+      operations = {
+        gets_per_sec = "memcache.googleapis.com/stats/get_requests"
+        sets_per_sec = "memcache.googleapis.com/stats/set_requests"
+        hits_per_sec = "memcache.googleapis.com/stats/hit_ratio"
+      }
+      connections = {
+        current_connections  = "memcache.googleapis.com/stats/curr_connections"
+        rejected_connections = "memcache.googleapis.com/stats/rejected_connections"
+      }
+    }
+  }
+}
+
+output "performance_config" {
+  description = "Performance configuration settings"
+  value = {
+    memory_settings = {
+      maxmemory_policy  = google_redis_instance.cache[0].redis_configs["maxmemory-policy"]
+      maxmemory_samples = try(google_redis_instance.cache[0].redis_configs["maxmemory-samples"], null)
+    }
+    connection_settings = {
+      client_timeout = var.client_timeout
+      tcp_keepalive  = var.tcp_keepalive
+    }
+    maintenance = {
+      defrag_settings = var.defrag_settings
+    }
+    advanced_configs = google_redis_instance.cache[0].redis_configs
+  }
+}

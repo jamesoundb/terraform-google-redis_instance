@@ -118,10 +118,10 @@ resource "google_monitoring_alert_policy" "workload_alerts" {
   documentation {
     content   = <<-EOT
       Workload-specific alerts for ${var.name} (${var.workload_type}):
-      
+
       Metrics being monitored:
       ${join("\n", local.selected_metrics)}
-      
+
       Thresholds are optimized for ${var.workload_type} workload pattern.
       Review the Redis configuration if alerts persist.
     EOT
