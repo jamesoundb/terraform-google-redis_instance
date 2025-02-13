@@ -39,6 +39,9 @@ jobs:
     name: Test
     needs: validate
     runs-on: ubuntu-latest
+    env:
+      TF_CLI_CONFIG_FILE: ""
+      TF_SKIP_PROVIDER_VERIFY: "1"
     steps:
     - uses: actions/checkout@v3
 
@@ -51,5 +54,6 @@ jobs:
       run: terraform init
 
     - name: Run Terraform Tests
-      # Using -var for project_id in CI, but tests will work with default mock values
-      run: terraform test
+      env:
+        TF_VAR_project_id: "test-project"
+      run: TF_ACC=1 terraform test
