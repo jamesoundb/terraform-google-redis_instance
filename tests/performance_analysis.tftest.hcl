@@ -1,8 +1,8 @@
 variables {
-  project_id = "test-project-id"
+  project_id  = "test-project-id"
   test_region = "us-central1"
   test_zones = {
-    primary = "us-central1-a"
+    primary   = "us-central1-a"
     secondary = "us-central1-b"
   }
 }
@@ -17,24 +17,24 @@ run "performance_analysis_config" {
 
   variables {
     project_id         = var.project_id
-    name              = "redis-analysis-test"
-    region            = "us-central1"
-    zone              = var.test_zones.primary
-    secondary_zone    = var.test_zones.secondary
-    memory_size_gb    = 5
-    tier              = "STANDARD_HA"
+    name               = "redis-analysis-test"
+    region             = "us-central1"
+    zone               = var.test_zones.primary
+    secondary_zone     = var.test_zones.secondary
+    memory_size_gb     = 5
+    tier               = "STANDARD_HA"
     authorized_network = "projects/${var.project_id}/global/networks/default"
-    
-    enable_performance_analysis = true
-    analysis_window = 3600
+
+    enable_performance_analysis      = true
+    analysis_window                  = 3600
     enable_automated_recommendations = true
-    recommendation_sensitivity = "medium"
-    persistence_enabled = true
-    persistence_mode = "RDB"
-    rdb_snapshot_period = "TWENTY_FOUR_HOURS"
-    maintenance_window_day = "MONDAY"
-    maintenance_window_hour = 2
-    maintenance_window_minutes = 30
+    recommendation_sensitivity       = "medium"
+    persistence_enabled              = true
+    persistence_mode                 = "RDB"
+    rdb_snapshot_period              = "TWENTY_FOUR_HOURS"
+    maintenance_window_day           = "MONDAY"
+    maintenance_window_hour          = 2
+    maintenance_window_minutes       = 30
   }
 
   assert {
@@ -53,19 +53,19 @@ run "performance_thresholds_validation" {
 
   variables {
     project_id         = var.project_id
-    name              = "redis-thresholds-test"
-    region            = var.test_region
-    zone              = var.test_zones.primary
-    secondary_zone    = var.test_zones.secondary
-    memory_size_gb    = 5
-    tier              = "STANDARD_HA"
+    name               = "redis-thresholds-test"
+    region             = var.test_region
+    zone               = var.test_zones.primary
+    secondary_zone     = var.test_zones.secondary
+    memory_size_gb     = 5
+    tier               = "STANDARD_HA"
     authorized_network = "projects/${var.project_id}/global/networks/default"
-    
+
     performance_score_thresholds = {
       memory_efficiency_min = 0.7
-      latency_score_min    = 0.75
-      throughput_score_min = 0.8
-      overall_health_min   = 0.75
+      latency_score_min     = 0.75
+      throughput_score_min  = 0.8
+      overall_health_min    = 0.75
     }
   }
 
@@ -80,18 +80,18 @@ run "workload_analysis_recommendations" {
 
   variables {
     project_id         = var.project_id
-    name              = "redis-workload-analysis"
-    region            = var.test_region
-    zone              = var.test_zones.primary
-    secondary_zone    = var.test_zones.secondary
-    memory_size_gb    = 5
-    tier              = "STANDARD_HA"
+    name               = "redis-workload-analysis"
+    region             = var.test_region
+    zone               = var.test_zones.primary
+    secondary_zone     = var.test_zones.secondary
+    memory_size_gb     = 5
+    tier               = "STANDARD_HA"
     authorized_network = "projects/${var.project_id}/global/networks/default"
-    
-    workload_type = "cache"
-    enable_performance_analysis = true
+
+    workload_type                    = "cache"
+    enable_performance_analysis      = true
     enable_automated_recommendations = true
-    recommendation_sensitivity = "high"
+    recommendation_sensitivity       = "high"
   }
 
   assert {
@@ -110,14 +110,14 @@ run "analysis_metrics_validation" {
 
   variables {
     project_id         = var.project_id
-    name              = "redis-metrics-test"
-    region            = var.test_region
-    zone              = var.test_zones.primary
-    secondary_zone    = var.test_zones.secondary
-    memory_size_gb    = 5
-    tier              = "STANDARD_HA"
+    name               = "redis-metrics-test"
+    region             = var.test_region
+    zone               = var.test_zones.primary
+    secondary_zone     = var.test_zones.secondary
+    memory_size_gb     = 5
+    tier               = "STANDARD_HA"
     authorized_network = "projects/${var.project_id}/global/networks/default"
-    
+
     enable_performance_analysis = true
   }
 
@@ -132,22 +132,22 @@ run "combined_analysis_validation" {
 
   variables {
     project_id         = var.project_id
-    name              = "redis-combined-test"
-    region            = var.test_region
-    zone              = var.test_zones.primary
-    secondary_zone    = var.test_zones.secondary
-    memory_size_gb    = 5
-    tier              = "STANDARD_HA"
+    name               = "redis-combined-test"
+    region             = var.test_region
+    zone               = var.test_zones.primary
+    secondary_zone     = var.test_zones.secondary
+    memory_size_gb     = 5
+    tier               = "STANDARD_HA"
     authorized_network = "projects/${var.project_id}/global/networks/default"
-    
-    enable_performance_analysis = true
+
+    enable_performance_analysis      = true
     enable_automated_recommendations = true
-    workload_type = "cache"
+    workload_type                    = "cache"
     performance_score_thresholds = {
       memory_efficiency_min = 0.8
-      latency_score_min    = 0.85
-      throughput_score_min = 0.9
-      overall_health_min   = 0.85
+      latency_score_min     = 0.85
+      throughput_score_min  = 0.9
+      overall_health_min    = 0.85
     }
   }
 

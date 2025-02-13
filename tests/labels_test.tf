@@ -12,11 +12,11 @@ terraform {
 module "redis_with_labels" {
   source = "../"
 
-  project_id = "test-project"
-  name       = "test-redis"
-  region     = "us-central1"
-  zone       = "us-central1-a"
-  tier       = "BASIC"
+  project_id         = "test-project"
+  name               = "test-redis"
+  region             = "us-central1"
+  zone               = "us-central1-a"
+  tier               = "BASIC"
   authorized_network = "default"
   memory_size_gb     = 1
   labels = {

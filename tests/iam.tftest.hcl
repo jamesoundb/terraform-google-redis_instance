@@ -11,14 +11,14 @@ run "service_account_creation" {
   command = plan
 
   variables {
-    project_id            = var.project_id
-    name                 = "test-redis-iam"
-    region               = "us-central1"
-    zone                 = "us-central1-a"
-    secondary_zone       = "us-central1-b"
-    memory_size_gb       = 5
-    tier                 = "STANDARD_HA"
-    authorized_network   = "projects/${var.project_id}/global/networks/default"
+    project_id             = var.project_id
+    name                   = "test-redis-iam"
+    region                 = "us-central1"
+    zone                   = "us-central1-a"
+    secondary_zone         = "us-central1-b"
+    memory_size_gb         = 5
+    tier                   = "STANDARD_HA"
+    authorized_network     = "projects/${var.project_id}/global/networks/default"
     create_service_account = true
   }
 
@@ -32,17 +32,17 @@ run "custom_role_validation" {
   command = plan
 
   variables {
-    project_id         = var.project_id
-    name              = "test-redis-roles"
-    region            = "us-central1"
-    zone              = "us-central1-a"
-    secondary_zone    = "us-central1-b"
-    memory_size_gb    = 5
-    tier              = "STANDARD_HA"
-    authorized_network = "projects/${var.project_id}/global/networks/default"
+    project_id          = var.project_id
+    name                = "test-redis-roles"
+    region              = "us-central1"
+    zone                = "us-central1-a"
+    secondary_zone      = "us-central1-b"
+    memory_size_gb      = 5
+    tier                = "STANDARD_HA"
+    authorized_network  = "projects/${var.project_id}/global/networks/default"
     create_custom_roles = true
-    admin_members     = ["user:test-admin@example.com"]
-    viewer_members    = ["group:test-viewers@example.com"]
+    admin_members       = ["user:test-admin@example.com"]
+    viewer_members      = ["group:test-viewers@example.com"]
   }
 
   assert {
@@ -65,16 +65,16 @@ run "vpc_sc_validation" {
   command = plan
 
   variables {
-    project_id         = var.project_id
-    name              = "test-redis-vpc-sc"
-    region            = "us-central1"
-    zone              = "us-central1-a"
-    secondary_zone    = "us-central1-b"
-    memory_size_gb    = 5
-    tier              = "STANDARD_HA"
-    authorized_network = "projects/${var.project_id}/global/networks/default"
-    enable_vpc_sc     = true
-    access_policy_id  = "123456789"
+    project_id           = var.project_id
+    name                 = "test-redis-vpc-sc"
+    region               = "us-central1"
+    zone                 = "us-central1-a"
+    secondary_zone       = "us-central1-b"
+    memory_size_gb       = 5
+    tier                 = "STANDARD_HA"
+    authorized_network   = "projects/${var.project_id}/global/networks/default"
+    enable_vpc_sc        = true
+    access_policy_id     = "123456789"
     vpc_sc_access_levels = ["accessPolicies/123456789/accessLevels/redis_access"]
   }
 
@@ -99,28 +99,28 @@ run "combined_security_config" {
 
   variables {
     project_id         = var.project_id
-    name              = "test-redis-security"
-    region            = "us-central1"
-    zone              = "us-central1-a"
-    secondary_zone    = "us-central1-b"
-    memory_size_gb    = 5
-    tier              = "STANDARD_HA"
+    name               = "test-redis-security"
+    region             = "us-central1"
+    zone               = "us-central1-a"
+    secondary_zone     = "us-central1-b"
+    memory_size_gb     = 5
+    tier               = "STANDARD_HA"
     authorized_network = "projects/${var.project_id}/global/networks/default"
-    
+
     # IAM configuration
     create_service_account = true
-    create_custom_roles   = true
-    admin_members        = ["user:admin@example.com"]
-    viewer_members       = ["group:viewers@example.com"]
-    
+    create_custom_roles    = true
+    admin_members          = ["user:admin@example.com"]
+    viewer_members         = ["group:viewers@example.com"]
+
     # VPC SC configuration
     enable_vpc_sc        = true
     access_policy_id     = "123456789"
     vpc_sc_access_levels = ["accessPolicies/123456789/accessLevels/redis_access"]
-    
+
     # Security settings
-    auth_enabled        = true
-    redis_version      = "REDIS_6_X"
+    auth_enabled  = true
+    redis_version = "REDIS_6_X"
   }
 
   assert {

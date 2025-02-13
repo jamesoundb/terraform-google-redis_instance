@@ -19,12 +19,12 @@ run "ha_redis_validation" {
 
   variables {
     project_id         = var.project_id
-    name              = "test-redis-ha"
-    region            = "us-central1"
-    zone              = "us-central1-a"
-    secondary_zone    = "us-central1-b"
-    memory_size_gb    = 5
-    tier              = "STANDARD_HA"
+    name               = "test-redis-ha"
+    region             = "us-central1"
+    zone               = "us-central1-a"
+    secondary_zone     = "us-central1-b"
+    memory_size_gb     = 5
+    tier               = "STANDARD_HA"
     authorized_network = "projects/${var.project_id}/global/networks/default"
   }
 
@@ -49,12 +49,12 @@ run "ha_redis_zones_validation" {
 
   variables {
     project_id         = var.project_id
-    name              = "test-redis-ha"
-    region            = "us-central1"
-    zone              = "us-central1-a"
-    secondary_zone    = "us-central1-a"  # Same as primary zone
-    memory_size_gb    = 5
-    tier              = "STANDARD_HA"
+    name               = "test-redis-ha"
+    region             = "us-central1"
+    zone               = "us-central1-a"
+    secondary_zone     = "us-central1-a" # Same as primary zone
+    memory_size_gb     = 5
+    tier               = "STANDARD_HA"
     authorized_network = "projects/${var.project_id}/global/networks/default"
   }
 
@@ -67,15 +67,15 @@ run "ha_redis_persistence_validation" {
   command = plan
 
   variables {
-    project_id           = var.project_id
+    project_id          = var.project_id
     name                = "test-redis-ha"
     region              = "us-central1"
     zone                = "us-central1-a"
     secondary_zone      = "us-central1-b"
     memory_size_gb      = 5
     tier                = "STANDARD_HA"
-    authorized_network   = "projects/${var.project_id}/global/networks/default"
-    persistence_enabled  = true
+    authorized_network  = "projects/${var.project_id}/global/networks/default"
+    persistence_enabled = true
     persistence_mode    = "RDB"
     rdb_snapshot_period = "TWENTY_FOUR_HOURS"
   }
@@ -91,15 +91,15 @@ run "ha_redis_maintenance_window" {
 
   variables {
     project_id                 = var.project_id
-    name                      = "test-redis-ha"
-    region                    = "us-central1"
-    zone                      = "us-central1-a"
-    secondary_zone            = "us-central1-b"
-    memory_size_gb            = 5
-    tier                      = "STANDARD_HA"
-    authorized_network        = "projects/${var.project_id}/global/networks/default"
-    maintenance_window_day    = "SUNDAY"
-    maintenance_window_hour   = 23
+    name                       = "test-redis-ha"
+    region                     = "us-central1"
+    zone                       = "us-central1-a"
+    secondary_zone             = "us-central1-b"
+    memory_size_gb             = 5
+    tier                       = "STANDARD_HA"
+    authorized_network         = "projects/${var.project_id}/global/networks/default"
+    maintenance_window_day     = "SUNDAY"
+    maintenance_window_hour    = 23
     maintenance_window_minutes = 30
   }
 

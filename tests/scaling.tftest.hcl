@@ -1,8 +1,8 @@
 variables {
   test_project_id = "var.project_id"
-  test_region = "us-central1"
+  test_region     = "us-central1"
   test_zones = {
-    primary = "us-central1-a"
+    primary   = "us-central1-a"
     secondary = "us-central1-b"
   }
   project_id = "test-project-id"
@@ -18,25 +18,25 @@ run "scaling_config_validation" {
 
   variables {
     project_id         = var.project_id
-    name              = "redis-scaling-test"
-    region            = "us-central1"
-    zone              = "us-central1-a"
-    secondary_zone    = "us-central1-b"
-    memory_size_gb    = 5
-    tier              = "STANDARD_HA"
+    name               = "redis-scaling-test"
+    region             = "us-central1"
+    zone               = "us-central1-a"
+    secondary_zone     = "us-central1-b"
+    memory_size_gb     = 5
+    tier               = "STANDARD_HA"
     authorized_network = "projects/${var.project_id}/global/networks/default"
-    
-    enable_autoscaling = true
-    scaling_cooldown_period = 3600
-    scaling_evaluation_period = 300
-    memory_scale_up_threshold = 0.85
+
+    enable_autoscaling          = true
+    scaling_cooldown_period     = 3600
+    scaling_evaluation_period   = 300
+    memory_scale_up_threshold   = 0.85
     memory_scale_down_threshold = 0.4
-    persistence_enabled = true
-    persistence_mode = "RDB"
-    rdb_snapshot_period = "TWENTY_FOUR_HOURS"
-    maintenance_window_day = "MONDAY"
-    maintenance_window_hour = 2
-    maintenance_window_minutes = 30
+    persistence_enabled         = true
+    persistence_mode            = "RDB"
+    rdb_snapshot_period         = "TWENTY_FOUR_HOURS"
+    maintenance_window_day      = "MONDAY"
+    maintenance_window_hour     = 2
+    maintenance_window_minutes  = 30
   }
 
   assert {
@@ -60,13 +60,13 @@ run "tier_upgrade_validation" {
 
   variables {
     project_id         = var.test_project_id
-    name              = "redis-tier-test"
-    region            = var.test_region
-    zone              = var.test_zones.primary
-    memory_size_gb    = 5
-    tier              = "BASIC"
+    name               = "redis-tier-test"
+    region             = var.test_region
+    zone               = var.test_zones.primary
+    memory_size_gb     = 5
+    tier               = "BASIC"
     authorized_network = "projects/${var.test_project_id}/global/networks/default"
-    
+
     enable_autoscaling = true
     uptime_requirement = 0.99
   }
@@ -82,17 +82,17 @@ run "scaling_thresholds_validation" {
 
   variables {
     project_id         = var.test_project_id
-    name              = "redis-threshold-test"
-    region            = var.test_region
-    zone              = var.test_zones.primary
-    secondary_zone    = var.test_zones.secondary
-    memory_size_gb    = 5
-    tier              = "STANDARD_HA"
+    name               = "redis-threshold-test"
+    region             = var.test_region
+    zone               = var.test_zones.primary
+    secondary_zone     = var.test_zones.secondary
+    memory_size_gb     = 5
+    tier               = "STANDARD_HA"
     authorized_network = "projects/${var.test_project_id}/global/networks/default"
-    
-    memory_scale_up_threshold = 0.8
+
+    memory_scale_up_threshold   = 0.8
     memory_scale_down_threshold = 0.3
-    scaling_evaluation_period = 600
+    scaling_evaluation_period   = 600
   }
 
   assert {
@@ -111,19 +111,19 @@ run "combined_scaling_validation" {
 
   variables {
     project_id         = var.test_project_id
-    name              = "redis-combined-test"
-    region            = var.test_region
-    zone              = var.test_zones.primary
-    secondary_zone    = var.test_zones.secondary
-    memory_size_gb    = 5
-    tier              = "STANDARD_HA"
+    name               = "redis-combined-test"
+    region             = var.test_region
+    zone               = var.test_zones.primary
+    secondary_zone     = var.test_zones.secondary
+    memory_size_gb     = 5
+    tier               = "STANDARD_HA"
     authorized_network = "projects/${var.test_project_id}/global/networks/default"
-    
-    enable_autoscaling = true
+
+    enable_autoscaling          = true
     enable_performance_analysis = true
-    workload_type = "cache"
-    scaling_cooldown_period = 3600
-    memory_scale_up_threshold = 0.85
+    workload_type               = "cache"
+    scaling_cooldown_period     = 3600
+    memory_scale_up_threshold   = 0.85
     memory_scale_down_threshold = 0.4
   }
 

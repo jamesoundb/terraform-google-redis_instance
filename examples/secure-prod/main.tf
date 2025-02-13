@@ -44,52 +44,52 @@ resource "google_kms_crypto_key" "redis" {
 module "redis_secure" {
   source = "../../"
 
-  project_id = var.project_id
-  name       = "redis-secure-prod"
-  region     = var.region
-  zone       = "${var.region}-a"
+  project_id     = var.project_id
+  name           = "redis-secure-prod"
+  region         = var.region
+  zone           = "${var.region}-a"
   secondary_zone = "${var.region}-b"
 
   # Instance configuration
   memory_size_gb = 10
-  tier          = "STANDARD_HA"
+  tier           = "STANDARD_HA"
 
   # Network security
   authorized_network = google_compute_network.redis_network.id
-  reserved_ip_range = "10.0.1.0/28"
+  reserved_ip_range  = "10.0.1.0/28"
 
   # Security features
-  auth_enabled = true
+  auth_enabled  = true
   redis_version = "REDIS_6_X"
-  
+
   # Redis configurations including security settings
   redis_configs = {
-    "maxmemory-policy" = "volatile-lru"
+    "maxmemory-policy"       = "volatile-lru"
     "notify-keyspace-events" = "Ex"
-    "timeout" = "3600"
-    "tcp-keepalive" = "300"
+    "timeout"                = "3600"
+    "tcp-keepalive"          = "300"
   }
 
   # Monitoring and alerts
   enable_optional_security_features = true
-  alert_notification_channels      = var.notification_channels
-  connections_threshold           = 500
+  alert_notification_channels       = var.notification_channels
+  connections_threshold             = 500
 
   # Backup configuration
   persistence_enabled   = true
-  persistence_mode     = "RDB"
-  rdb_snapshot_period  = "SIX_HOURS"
-  enable_backup        = true
+  persistence_mode      = "RDB"
+  rdb_snapshot_period   = "SIX_HOURS"
+  enable_backup         = true
   backup_retention_days = 30
-  
+
   # Cross-region disaster recovery
   cross_region_backup = true
-  backup_regions     = ["us-west1", "us-east1"]
+  backup_regions      = ["us-west1", "us-east1"]
 
   # Labels for security tracking
   labels = {
-    environment     = "prod"
-    security_level  = "high"
+    environment    = "prod"
+    security_level = "high"
     compliance     = "required"
     backup_enabled = "true"
   }

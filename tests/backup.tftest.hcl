@@ -11,17 +11,17 @@ run "backup_configuration_test" {
   command = plan
 
   variables {
-    project_id           = var.project_id
-    name                = "redis-backup-test"
-    region              = "us-central1"
-    zone                = "us-central1-a"
-    secondary_zone      = "us-central1-b"
-    memory_size_gb      = 5
-    tier                = "STANDARD_HA"
-    authorized_network  = "projects/${var.project_id}/global/networks/default"
-    persistence_enabled = true
-    persistence_mode    = "RDB"
-    enable_backup       = true
+    project_id            = var.project_id
+    name                  = "redis-backup-test"
+    region                = "us-central1"
+    zone                  = "us-central1-a"
+    secondary_zone        = "us-central1-b"
+    memory_size_gb        = 5
+    tier                  = "STANDARD_HA"
+    authorized_network    = "projects/${var.project_id}/global/networks/default"
+    persistence_enabled   = true
+    persistence_mode      = "RDB"
+    enable_backup         = true
     backup_retention_days = 30
   }
 
@@ -45,7 +45,7 @@ run "cross_region_backup_test" {
   command = plan
 
   variables {
-    project_id           = var.project_id
+    project_id          = var.project_id
     name                = "redis-dr-test"
     region              = "us-central1"
     zone                = "us-central1-a"

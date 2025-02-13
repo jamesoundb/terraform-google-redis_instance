@@ -44,25 +44,25 @@ module "redis_cost_optimized" {
 
   # Enable cost optimization features
   enable_cost_optimization = true
-  enable_autoscaling      = true
-  
+  enable_autoscaling       = true
+
   # Configure autoscaling thresholds
   memory_scale_up_threshold   = 0.8
   memory_scale_down_threshold = 0.4
 
   # Optimize persistence settings based on environment
   persistence_enabled = var.environment == "prod"
-  persistence_mode   = "RDB"
+  persistence_mode    = "RDB"
   rdb_snapshot_period = var.environment == "prod" ? "6h" : "24h"
 
   # Configure maintenance window for off-peak hours
-  maintenance_window_day     = 7  # Sunday
-  maintenance_window_hour    = 3  # 3 AM
+  maintenance_window_day     = 7 # Sunday
+  maintenance_window_hour    = 3 # 3 AM
   maintenance_window_minutes = 0
 
   # Set environment-specific labels
   labels = {
-    environment     = var.environment
+    environment    = var.environment
     cost_optimized = "true"
     managed_by     = "terraform"
   }

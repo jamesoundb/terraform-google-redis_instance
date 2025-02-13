@@ -11,13 +11,13 @@ run "cost_optimization_validation" {
   command = plan
 
   variables {
-    project_id         = var.project_id
-    name              = "redis-cost-test"
-    region            = "us-central1"
-    zone              = "us-central1-a"
-    memory_size_gb    = 2
-    tier              = "BASIC"
-    authorized_network = "projects/${var.project_id}/global/networks/default"
+    project_id               = var.project_id
+    name                     = "redis-cost-test"
+    region                   = "us-central1"
+    zone                     = "us-central1-a"
+    memory_size_gb           = 2
+    tier                     = "BASIC"
+    authorized_network       = "projects/${var.project_id}/global/networks/default"
     enable_cost_optimization = true
     labels = {
       environment = "dev"
@@ -39,16 +39,16 @@ run "autoscaling_thresholds_validation" {
   command = plan
 
   variables {
-    project_id         = var.project_id
-    name              = "test-redis-auto"
-    region            = "us-central1"
-    zone              = "us-central1-a"
-    secondary_zone    = "us-central1-b"
-    memory_size_gb    = 5
-    tier              = "STANDARD_HA"
-    authorized_network = "projects/${var.project_id}/global/networks/default"
-    enable_autoscaling = true
-    memory_scale_up_threshold = 0.8
+    project_id                  = var.project_id
+    name                        = "test-redis-auto"
+    region                      = "us-central1"
+    zone                        = "us-central1-a"
+    secondary_zone              = "us-central1-b"
+    memory_size_gb              = 5
+    tier                        = "STANDARD_HA"
+    authorized_network          = "projects/${var.project_id}/global/networks/default"
+    enable_autoscaling          = true
+    memory_scale_up_threshold   = 0.8
     memory_scale_down_threshold = 0.5
   }
 
@@ -72,16 +72,16 @@ run "production_cost_validation" {
   command = plan
 
   variables {
-    project_id         = var.project_id
-    name              = "test-redis-prod-cost"
-    region            = "us-central1"
-    zone              = "us-central1-a"
-    secondary_zone    = "us-central1-b"
-    memory_size_gb    = 10
-    tier              = "STANDARD_HA"
-    authorized_network = "projects/${var.project_id}/global/networks/default"
+    project_id               = var.project_id
+    name                     = "test-redis-prod-cost"
+    region                   = "us-central1"
+    zone                     = "us-central1-a"
+    secondary_zone           = "us-central1-b"
+    memory_size_gb           = 10
+    tier                     = "STANDARD_HA"
+    authorized_network       = "projects/${var.project_id}/global/networks/default"
     enable_cost_optimization = true
-    scaling_cooldown_period = 3600
+    scaling_cooldown_period  = 3600
     labels = {
       environment = "prod"
     }

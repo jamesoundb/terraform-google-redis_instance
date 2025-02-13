@@ -12,14 +12,14 @@ run "basic_redis_validation" {
 
   variables {
     project_id         = var.project_id
-    name              = "test-redis"
-    region            = "us-central1"
-    zone              = "us-central1-a"
-    memory_size_gb    = 1
-    tier              = "BASIC"
+    name               = "test-redis"
+    region             = "us-central1"
+    zone               = "us-central1-a"
+    memory_size_gb     = 1
+    tier               = "BASIC"
     authorized_network = "projects/${var.project_id}/global/networks/default"
-    auth_enabled      = true
-    redis_version     = "REDIS_6_X"
+    auth_enabled       = true
+    redis_version      = "REDIS_6_X"
   }
 
   assert {

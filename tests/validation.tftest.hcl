@@ -9,16 +9,16 @@ provider "google" {
 
 run "validate_required_configuration" {
   command = plan
-  
+
   variables {
-    project_id = var.project_id
-    name = "redis-validation-test"
-    region = "us-central1"
-    zone = "us-central1-a"
-    memory_size_gb = 5
-    tier = "STANDARD_HA"
+    project_id         = var.project_id
+    name               = "redis-validation-test"
+    region             = "us-central1"
+    zone               = "us-central1-a"
+    memory_size_gb     = 5
+    tier               = "STANDARD_HA"
     authorized_network = "projects/${var.project_id}/global/networks/default"
-    secondary_zone = "us-central1-b"
+    secondary_zone     = "us-central1-b"
   }
 
   assert {

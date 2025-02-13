@@ -1,8 +1,8 @@
 variables {
   test_project_id = "var.project_id"
-  test_region = "us-central1"
+  test_region     = "us-central1"
   test_zones = {
-    primary = "us-central1-a"
+    primary   = "us-central1-a"
     secondary = "us-central1-b"
   }
   project_id = "test-project-id"
@@ -19,36 +19,36 @@ run "security_baseline_test" {
 
   variables {
     project_id         = var.project_id
-    name              = "redis-security-test"
-    region            = "us-central1"
-    zone              = var.test_zones.primary
-    secondary_zone    = var.test_zones.secondary
-    memory_size_gb    = 5
-    tier              = "STANDARD_HA"
+    name               = "redis-security-test"
+    region             = "us-central1"
+    zone               = var.test_zones.primary
+    secondary_zone     = var.test_zones.secondary
+    memory_size_gb     = 5
+    tier               = "STANDARD_HA"
     authorized_network = "projects/${var.project_id}/global/networks/secure-network"
-    
+
     # Security settings that should be enforced
-    auth_enabled      = true
-    redis_version     = "REDIS_6_X"
-    
+    auth_enabled  = true
+    redis_version = "REDIS_6_X"
+
     # Network security
     reserved_ip_range = "10.0.2.0/28"
-    
+
     # Labels for security tracking
     labels = {
       security_level = "high"
-      compliance    = "required"
-      encryption    = "enabled"
+      compliance     = "required"
+      encryption     = "enabled"
     }
 
     # Persistence configuration
     persistence_enabled = true
-    persistence_mode = "RDB"
+    persistence_mode    = "RDB"
     rdb_snapshot_period = "TWENTY_FOUR_HOURS"
 
     # Maintenance policy
-    maintenance_window_day = "MONDAY"
-    maintenance_window_hour = 2
+    maintenance_window_day     = "MONDAY"
+    maintenance_window_hour    = 2
     maintenance_window_minutes = 30
   }
 
@@ -74,14 +74,14 @@ run "network_security_test" {
 
   variables {
     project_id         = var.test_project_id
-    name              = "redis-network-security"
-    region            = var.test_region
-    zone              = var.test_zones.primary
-    secondary_zone    = var.test_zones.secondary
-    memory_size_gb    = 5
-    tier              = "STANDARD_HA"
+    name               = "redis-network-security"
+    region             = var.test_region
+    zone               = var.test_zones.primary
+    secondary_zone     = var.test_zones.secondary
+    memory_size_gb     = 5
+    tier               = "STANDARD_HA"
     authorized_network = "projects/${var.project_id}/global/networks/secure-network"
-    reserved_ip_range = "10.0.2.0/28"
+    reserved_ip_range  = "10.0.2.0/28"
   }
 
   assert {
@@ -96,14 +96,14 @@ run "access_control_test" {
 
   variables {
     project_id         = var.test_project_id
-    name              = "redis-access-control"
-    region            = var.test_region
-    zone              = var.test_zones.primary
-    secondary_zone    = var.test_zones.secondary
-    memory_size_gb    = 5
-    tier              = "STANDARD_HA"
+    name               = "redis-access-control"
+    region             = var.test_region
+    zone               = var.test_zones.primary
+    secondary_zone     = var.test_zones.secondary
+    memory_size_gb     = 5
+    tier               = "STANDARD_HA"
     authorized_network = "projects/${var.project_id}/global/networks/secure-network"
-    auth_enabled      = true
+    auth_enabled       = true
   }
 
   assert {

@@ -12,14 +12,14 @@ run "network_validation" {
 
   variables {
     project_id         = var.project_id
-    name              = "test-redis-integration"
-    region            = "us-central1"
-    zone              = "us-central1-a"
-    secondary_zone    = "us-central1-b"
-    memory_size_gb    = 5
-    tier              = "STANDARD_HA"
+    name               = "test-redis-integration"
+    region             = "us-central1"
+    zone               = "us-central1-a"
+    secondary_zone     = "us-central1-b"
+    memory_size_gb     = 5
+    tier               = "STANDARD_HA"
     authorized_network = "projects/${var.project_id}/global/networks/default"
-    reserved_ip_range = "10.0.1.0/28"
+    reserved_ip_range  = "10.0.1.0/28"
   }
 
   assert {

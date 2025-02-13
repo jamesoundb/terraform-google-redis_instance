@@ -1,8 +1,8 @@
 variables {
   test_project_id = "var.project_id"
-  test_region = "us-central1"
+  test_region     = "us-central1"
   test_zones = {
-    primary = "us-central1-a"
+    primary   = "us-central1-a"
     secondary = "us-central1-b"
   }
   project_id = "test-project-id"
@@ -18,24 +18,24 @@ run "performance_monitoring_config" {
 
   variables {
     project_id         = var.project_id
-    name              = "redis-perf-test"
-    region            = "us-central1"
-    zone              = "us-central1-a"
-    secondary_zone    = "us-central1-b"
-    memory_size_gb    = 5
-    tier              = "STANDARD_HA"
+    name               = "redis-perf-test"
+    region             = "us-central1"
+    zone               = "us-central1-a"
+    secondary_zone     = "us-central1-b"
+    memory_size_gb     = 5
+    tier               = "STANDARD_HA"
     authorized_network = "projects/${var.project_id}/global/networks/default"
-    
-    enable_performance_monitoring = true
+
+    enable_performance_monitoring  = true
     memory_fragmentation_threshold = 1.5
-    latency_threshold_ms = 10
-    cache_hit_rate_threshold = 0.8
-    persistence_enabled = true
-    persistence_mode = "RDB"
-    rdb_snapshot_period = "TWENTY_FOUR_HOURS"
-    maintenance_window_day = "MONDAY"
-    maintenance_window_hour = 2
-    maintenance_window_minutes = 30
+    latency_threshold_ms           = 10
+    cache_hit_rate_threshold       = 0.8
+    persistence_enabled            = true
+    persistence_mode               = "RDB"
+    rdb_snapshot_period            = "TWENTY_FOUR_HOURS"
+    maintenance_window_day         = "MONDAY"
+    maintenance_window_hour        = 2
+    maintenance_window_minutes     = 30
   }
 
   assert {
@@ -64,17 +64,17 @@ run "performance_thresholds_validation" {
 
   variables {
     project_id         = var.test_project_id
-    name              = "redis-threshold-test"
-    region            = var.test_region
-    zone              = var.test_zones.primary
-    secondary_zone    = var.test_zones.secondary
-    memory_size_gb    = 5
-    tier              = "STANDARD_HA"
+    name               = "redis-threshold-test"
+    region             = var.test_region
+    zone               = var.test_zones.primary
+    secondary_zone     = var.test_zones.secondary
+    memory_size_gb     = 5
+    tier               = "STANDARD_HA"
     authorized_network = "projects/${var.test_project_id}/global/networks/default"
-    
+
     memory_fragmentation_threshold = 2.0
-    latency_threshold_ms = 5
-    cache_hit_rate_threshold = 0.9
+    latency_threshold_ms           = 5
+    cache_hit_rate_threshold       = 0.9
   }
 
   assert {
@@ -98,18 +98,18 @@ run "ha_performance_config" {
 
   variables {
     project_id         = var.test_project_id
-    name              = "redis-ha-perf-test"
-    region            = var.test_region
-    zone              = var.test_zones.primary
-    secondary_zone    = var.test_zones.secondary
-    memory_size_gb    = 10
-    tier              = "STANDARD_HA"
+    name               = "redis-ha-perf-test"
+    region             = var.test_region
+    zone               = var.test_zones.primary
+    secondary_zone     = var.test_zones.secondary
+    memory_size_gb     = 10
+    tier               = "STANDARD_HA"
     authorized_network = "projects/${var.test_project_id}/global/networks/default"
-    
-    enable_performance_monitoring = true
+
+    enable_performance_monitoring  = true
     memory_fragmentation_threshold = 1.5
-    latency_threshold_ms = 8
-    cache_hit_rate_threshold = 0.85
+    latency_threshold_ms           = 8
+    cache_hit_rate_threshold       = 0.85
   }
 
   assert {

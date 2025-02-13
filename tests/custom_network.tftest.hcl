@@ -12,14 +12,14 @@ run "custom_network_validation" {
 
   variables {
     project_id         = var.project_id
-    name              = "test-redis-custom"
-    region            = "us-central1"
-    zone              = "us-central1-a"
-    secondary_zone    = "us-central1-b"
-    memory_size_gb    = 5
-    tier              = "STANDARD_HA"
+    name               = "test-redis-custom"
+    region             = "us-central1"
+    zone               = "us-central1-a"
+    secondary_zone     = "us-central1-b"
+    memory_size_gb     = 5
+    tier               = "STANDARD_HA"
     authorized_network = "projects/${var.project_id}/global/networks/custom-network"
-    reserved_ip_range = "10.0.1.0/24"
+    reserved_ip_range  = "10.0.1.0/24"
   }
 
   assert {
@@ -38,14 +38,14 @@ run "custom_network_ip_range_validation" {
 
   variables {
     project_id         = var.project_id
-    name              = "test-redis-custom"
-    region            = "us-central1"
-    zone              = "us-central1-a"
-    secondary_zone    = "us-central1-b"
-    memory_size_gb    = 5
-    tier              = "STANDARD_HA"
+    name               = "test-redis-custom"
+    region             = "us-central1"
+    zone               = "us-central1-a"
+    secondary_zone     = "us-central1-b"
+    memory_size_gb     = 5
+    tier               = "STANDARD_HA"
     authorized_network = "projects/${var.project_id}/global/networks/custom-network"
-    reserved_ip_range = "invalid-cidr"
+    reserved_ip_range  = "invalid-cidr"
   }
 
   expect_failures = [
@@ -58,14 +58,14 @@ run "custom_network_labels_validation" {
 
   variables {
     project_id         = var.project_id
-    name              = "test-redis-custom"
-    region            = "us-central1"
-    zone              = "us-central1-a"
-    secondary_zone    = "us-central1-b"
-    memory_size_gb    = 5
-    tier              = "STANDARD_HA"
+    name               = "test-redis-custom"
+    region             = "us-central1"
+    zone               = "us-central1-a"
+    secondary_zone     = "us-central1-b"
+    memory_size_gb     = 5
+    tier               = "STANDARD_HA"
     authorized_network = "projects/${var.project_id}/global/networks/custom-network"
-    reserved_ip_range = "10.0.1.0/28"
+    reserved_ip_range  = "10.0.1.0/28"
     labels = {
       environment = "prod"
       network     = "custom"
@@ -89,16 +89,16 @@ run "custom_network_auth_validation" {
 
   variables {
     project_id         = var.project_id
-    name              = "test-redis-custom"
-    region            = "us-central1"
-    zone              = "us-central1-a"
-    secondary_zone    = "us-central1-b"
-    memory_size_gb    = 5
-    tier              = "STANDARD_HA"
+    name               = "test-redis-custom"
+    region             = "us-central1"
+    zone               = "us-central1-a"
+    secondary_zone     = "us-central1-b"
+    memory_size_gb     = 5
+    tier               = "STANDARD_HA"
     authorized_network = "projects/${var.project_id}/global/networks/custom-network"
-    reserved_ip_range = "10.0.1.0/28"
-    auth_enabled      = true
-    redis_version     = "REDIS_6_X"
+    reserved_ip_range  = "10.0.1.0/28"
+    auth_enabled       = true
+    redis_version      = "REDIS_6_X"
   }
 
   assert {

@@ -12,15 +12,15 @@ output "redis_instance" {
 output "cost_optimization" {
   description = "Cost optimization configuration and metrics"
   value = {
-    environment      = var.environment
-    is_ha_enabled    = local.env_config.ha_enabled
-    autoscaling_enabled = true
-    scale_up_threshold = var.memory_scale_up_threshold
+    environment          = var.environment
+    is_ha_enabled        = local.env_config.ha_enabled
+    autoscaling_enabled  = true
+    scale_up_threshold   = var.memory_scale_up_threshold
     scale_down_threshold = var.memory_scale_down_threshold
   }
 }
 
 output "monitoring_dashboard" {
   description = "Cost optimization dashboard URL"
-  value = module.redis_cost_optimized.monitoring_resources
+  value       = module.redis_cost_optimized.monitoring_resources
 }

@@ -1,8 +1,8 @@
 variables {
   project_id = "test-project-id"
-  region = "us-central1"
+  region     = "us-central1"
   zones = {
-    primary = "us-central1-a"
+    primary   = "us-central1-a"
     secondary = "us-central1-b"
   }
 }
@@ -17,28 +17,28 @@ run "network_monitoring_config" {
 
   variables {
     project_id         = var.project_id
-    name              = "redis-network-test"
-    region            = var.region
-    zone              = var.zones.primary
-    secondary_zone    = var.zones.secondary
-    memory_size_gb    = 5
-    tier              = "STANDARD_HA"
+    name               = "redis-network-test"
+    region             = var.region
+    zone               = var.zones.primary
+    secondary_zone     = var.zones.secondary
+    memory_size_gb     = 5
+    tier               = "STANDARD_HA"
     authorized_network = "projects/${var.project_id}/global/networks/default"
-    
-    enable_network_monitoring = true
-    max_connections_threshold = 1000
-    network_latency_threshold_ms = 5
+
+    enable_network_monitoring      = true
+    max_connections_threshold      = 1000
+    network_latency_threshold_ms   = 5
     connection_rejection_threshold = 10
-    
+
     create_firewall_rules = true
-    allowed_ip_ranges = ["10.0.0.0/8", "172.16.0.0/12"]
-    allowed_source_tags = ["redis-client"]
-    
-    persistence_enabled = true
-    persistence_mode = "RDB"
-    rdb_snapshot_period = "TWENTY_FOUR_HOURS"
-    maintenance_window_day = "MONDAY"
-    maintenance_window_hour = 2
+    allowed_ip_ranges     = ["10.0.0.0/8", "172.16.0.0/12"]
+    allowed_source_tags   = ["redis-client"]
+
+    persistence_enabled        = true
+    persistence_mode           = "RDB"
+    rdb_snapshot_period        = "TWENTY_FOUR_HOURS"
+    maintenance_window_day     = "MONDAY"
+    maintenance_window_hour    = 2
     maintenance_window_minutes = 30
   }
 
@@ -58,16 +58,16 @@ run "network_thresholds_validation" {
 
   variables {
     project_id         = var.project_id
-    name              = "redis-network-thresholds"
-    region            = var.region
-    zone              = var.zones.primary
-    secondary_zone    = var.zones.secondary
-    memory_size_gb    = 5
-    tier              = "STANDARD_HA"
+    name               = "redis-network-thresholds"
+    region             = var.region
+    zone               = var.zones.primary
+    secondary_zone     = var.zones.secondary
+    memory_size_gb     = 5
+    tier               = "STANDARD_HA"
     authorized_network = "projects/${var.project_id}/global/networks/default"
-    
-    max_connections_threshold = 2000
-    network_latency_threshold_ms = 10
+
+    max_connections_threshold      = 2000
+    network_latency_threshold_ms   = 10
     connection_rejection_threshold = 5
   }
 
@@ -87,17 +87,17 @@ run "firewall_rules_validation" {
 
   variables {
     project_id         = var.project_id
-    name              = "redis-firewall-test"
-    region            = var.region
-    zone              = var.zones.primary
-    secondary_zone    = var.zones.secondary
-    memory_size_gb    = 5
-    tier              = "STANDARD_HA"
+    name               = "redis-firewall-test"
+    region             = var.region
+    zone               = var.zones.primary
+    secondary_zone     = var.zones.secondary
+    memory_size_gb     = 5
+    tier               = "STANDARD_HA"
     authorized_network = "projects/${var.project_id}/global/networks/default"
-    
+
     create_firewall_rules = true
-    allowed_source_tags = ["app-server", "cache-client"]
-    allowed_ip_ranges = ["10.0.0.0/8"]
+    allowed_source_tags   = ["app-server", "cache-client"]
+    allowed_ip_ranges     = ["10.0.0.0/8"]
   }
 
   assert {
@@ -116,17 +116,17 @@ run "ha_network_config" {
 
   variables {
     project_id         = var.project_id
-    name              = "redis-ha-network"
-    region            = var.region
-    zone              = var.zones.primary
-    secondary_zone    = var.zones.secondary
-    memory_size_gb    = 10
-    tier              = "STANDARD_HA"
+    name               = "redis-ha-network"
+    region             = var.region
+    zone               = var.zones.primary
+    secondary_zone     = var.zones.secondary
+    memory_size_gb     = 10
+    tier               = "STANDARD_HA"
     authorized_network = "projects/${var.project_id}/global/networks/default"
-    
-    enable_network_monitoring = true
-    max_connections_threshold = 5000
-    network_latency_threshold_ms = 3
+
+    enable_network_monitoring      = true
+    max_connections_threshold      = 5000
+    network_latency_threshold_ms   = 3
     connection_rejection_threshold = 20
   }
 
