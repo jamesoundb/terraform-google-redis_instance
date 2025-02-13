@@ -52,4 +52,4 @@ jobs:
 
     - name: Run Terraform Tests
       # Using -var for project_id in CI, but tests will work with default mock values
-      run: terraform test -var="project_id=${{ secrets.GCP_PROJECT_ID }}"
+      run: terraform test
