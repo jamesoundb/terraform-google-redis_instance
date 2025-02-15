@@ -2,6 +2,11 @@ variables {
   project_id = "test-project-id"
 }
 
+provider "google" {
+  project = var.project_id
+  region  = "us-central1"
+}
+
 run "backup_configuration_test" {
   command = plan
 
